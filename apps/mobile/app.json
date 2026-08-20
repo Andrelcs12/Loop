@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "Loop",
+    "slug": "loop",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/brand/loop-icon-light.png",
+    "scheme": "loop",
+    "userInterfaceStyle": "automatic",
+    "backgroundColor": "#FAFAFA",
+    "primaryColor": "#FF7A1A",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#09090B",
+        "foregroundImage": "./assets/images/brand/loop-mark.png"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/brand/loop-icon-light.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/brand/loop-mark.png",
+          "imageWidth": 160,
+          "resizeMode": "contain",
+          "backgroundColor": "#09090B",
+          "dark": {
+            "image": "./assets/images/brand/loop-mark.png",
+            "backgroundColor": "#09090B"
+          }
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}
