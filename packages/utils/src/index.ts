@@ -1,0 +1,1 @@
+export { minutesToLabel } from "./duration";
