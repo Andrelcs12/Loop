@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Image, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import Animated, {
   cancelAnimation,
   Easing,
@@ -126,12 +126,28 @@ export function SplashScreen({ onFinish }: SplashScreenProps) {
     <View className="flex-1 items-center justify-center bg-loop-background">
       <Animated.View className="items-center" style={compositionStyle}>
         <Animated.View style={markStyle}>
-          <Image accessibilityLabel="Símbolo Loop" source={require('@/assets/images/brand/loop-mark.png')} className="h-[136px] w-[136px]" />
+          <Image accessibilityLabel="Símbolo Loop" source={require('@/assets/images/brand/loop-mark.png')} style={styles.mark} />
         </Animated.View>
-        <Animated.View className="absolute top-[136px] mt-3" style={wordmarkStyle}>
-          <Image accessibilityLabel="Loop" source={require('@/assets/images/brand/loop-wordmark-light.png')} className="h-[43px] w-32" />
+        <Animated.View style={[styles.wordmark, wordmarkStyle]}>
+          <Image accessibilityLabel="Loop" source={require('@/assets/images/brand/loop-wordmark-light.png')} style={styles.wordmarkImage} />
         </Animated.View>
       </Animated.View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  mark: {
+    height: 136,
+    width: 136,
+  },
+  wordmark: {
+    marginTop: 12,
+    position: 'absolute',
+    top: 136,
+  },
+  wordmarkImage: {
+    height: 43,
+    width: 128,
+  },
+});
