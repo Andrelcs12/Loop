@@ -33,18 +33,19 @@ export const colors = {
 } as const;
 
 export const semanticColors = {
-  background: colors.neutral[950],
+  background: "#000000",
   surface: colors.neutral[900],
-  surfaceElevated: colors.neutral[800],
+  surfaceSecondary: colors.neutral[800],
 
   textPrimary: colors.neutral[50],
   textSecondary: colors.neutral[400],
+  textMuted: colors.neutral[500],
   textInverse: colors.neutral[950],
   border: colors.neutral[800],
 
-  primary: colors.brand[500],
+  primary: "#FF6A00",
   primaryHover: colors.brand[400],
-  primaryPressed: colors.brand[600],
+  primaryPressed: "#E85F00",
   primarySoft: colors.brand[100],
 
   success: colors.success,

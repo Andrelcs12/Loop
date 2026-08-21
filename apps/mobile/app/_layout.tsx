@@ -1,26 +1,62 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import {
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_600SemiBold,
+  Inter_700Bold,
+  useFonts,
+} from '@expo-google-fonts/inter';
+import { DarkTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
+import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import '../global.css';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { semanticColors } from '@loop/design-tokens';
+
+SplashScreen.preventAutoHideAsync();
 
 export const unstable_settings = {
-  anchor: '(tabs)',
+  initialRouteName: 'index',
 };
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  const [fontsLoaded, fontError] = useFonts({
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_600SemiBold,
+    Inter_700Bold,
+  });
+
+  useEffect(() => {
+    if (fontsLoaded || fontError) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontError, fontsLoaded]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider
+      value={{
+        ...DarkTheme,
+        colors: {
+          ...DarkTheme.colors,
+          background: semanticColors.background,
+          border: semanticColors.border,
+          card: semanticColors.surface,
+          primary: semanticColors.primary,
+          text: semanticColors.textPrimary,
+        },
+      }}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+        <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </ThemeProvider>
   );
 }
