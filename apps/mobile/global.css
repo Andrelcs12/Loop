@@ -3,3 +3,22 @@
 @import "tailwindcss/utilities.css";
 
 @import "nativewind/theme";
+
+@theme {
+  --color-loop-background: #000000;
+  --color-loop-surface: #18181B;
+  --color-loop-text-primary: #FAFAFA;
+  --color-loop-text-secondary: #A1A1AA;
+  --color-loop-text-muted: #71717A;
+  --color-loop-text-inverse: #09090B;
+  --color-loop-border: #27272A;
+  --color-loop-primary: #FF6A00;
+
+  --font-loop-regular: "Inter_400Regular";
+  --font-loop-medium: "Inter_500Medium";
+  --font-loop-semibold: "Inter_600SemiBold";
+  --font-loop-bold: "Inter_700Bold";
+
+  --radius-loop-lg: 12px;
+  --radius-loop-xl: 16px;
+}
