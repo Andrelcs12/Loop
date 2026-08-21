@@ -1,5 +1,5 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Text, View } from 'react-native';
+import { Text, View } from 'react-native-css/components';
 
 import { semanticColors } from '@loop/design-tokens';
 

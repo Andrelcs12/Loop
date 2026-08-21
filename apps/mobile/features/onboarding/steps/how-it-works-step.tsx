@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Text, View } from 'react-native-css/components';
 
 const instructions = ['Adicione suas tarefas e compromissos', 'Diga quanto tempo você tem', 'Receba a melhor ação para o momento', 'Comece, conclua e avance'];
 

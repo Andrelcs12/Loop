@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View } from 'react-native-css/components';
 
 export function OnboardingProgress({ activeStep }: { activeStep: number }) {
   return (

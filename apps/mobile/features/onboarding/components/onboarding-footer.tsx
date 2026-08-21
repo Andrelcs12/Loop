@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Text, View } from 'react-native-css/components';
 
 import { OnboardingProgress } from './onboarding-progress';
 import { PrimaryButton } from './primary-button';

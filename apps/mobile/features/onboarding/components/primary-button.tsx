@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native-css/components';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 
 type PrimaryButtonProps = { label: string; onPress: () => void; variant?: 'primary' | 'secondary'; icon?: ReactNode };

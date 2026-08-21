@@ -4,6 +4,7 @@ import Animated, {
   FadeInRight,
   FadeOutLeft,
 } from "react-native-reanimated";
+import { View } from 'react-native-css/components';
 
 import { OnboardingFooter } from "./components/onboarding-footer";
 import { OnboardingLayout } from "./components/onboarding-layout";
@@ -25,14 +26,16 @@ export function OnboardingScreen() {
     >
       <Animated.View
         key={step}
-        className="flex-1 justify-start pt-4"
         entering={FadeInRight.duration(360).easing(Easing.out(Easing.cubic))}
         exiting={FadeOutLeft.duration(220)}
+        style={{ flex: 1 }}
       >
-        {step === 0 ? <WelcomeStep /> : null}
-        {step === 1 ? <PromiseStep /> : null}
-        {step === 2 ? <HowItWorksStep /> : null}
-        {step === 3 ? <AccountStep /> : null}
+        <View className="flex-1 justify-start pt-4">
+          {step === 0 ? <WelcomeStep /> : null}
+          {step === 1 ? <PromiseStep /> : null}
+          {step === 2 ? <HowItWorksStep /> : null}
+          {step === 3 ? <AccountStep /> : null}
+        </View>
       </Animated.View>
     </OnboardingLayout>
   );

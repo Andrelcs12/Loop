@@ -1,4 +1,4 @@
-import { Image, Text } from "react-native";
+import { Image, Text } from 'react-native-css/components';
 
 export function WelcomeStep() {
   return (
