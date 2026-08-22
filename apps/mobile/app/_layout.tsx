@@ -4,22 +4,22 @@ import {
   Inter_600SemiBold,
   Inter_700Bold,
   useFonts,
-} from '@expo-google-fonts/inter';
-import { DarkTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+} from "@expo-google-fonts/inter";
+import { DarkTheme, ThemeProvider } from "@react-navigation/native";
+import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
+import "react-native-reanimated";
 
-import '../global.css';
+import "../global.css";
 
-import { semanticColors } from '@loop/design-tokens';
+import { semanticColors } from "@loop/design-tokens";
 
 SplashScreen.preventAutoHideAsync();
 
 export const unstable_settings = {
-  initialRouteName: 'index',
+  initialRouteName: "index",
 };
 
 export default function RootLayout() {
@@ -52,8 +52,9 @@ export default function RootLayout() {
           primary: semanticColors.primary,
           text: semanticColors.textPrimary,
         },
-      }}>
-      <Stack>
+      }}
+    >
+      <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
       <StatusBar style="light" />
