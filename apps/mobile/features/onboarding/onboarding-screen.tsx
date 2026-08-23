@@ -43,17 +43,19 @@ export function OnboardingScreen() {
         exiting={FadeOutLeft.duration(220)}
         style={{ flex: 1 }}
       >
+        {/* 
         <Text style={styles.teste}>oiii</Text>
 
         <Pressable className="bg-green-300 px-4 py-2 " onPress={handleClick}>
           Ir pro home
         </Pressable>
 
+        */}
+
         <View className="flex-1 justify-start pt-4">
           {step === 0 ? <WelcomeStep /> : null}
           {step === 1 ? <PromiseStep /> : null}
           {step === 2 ? <HowItWorksStep /> : null}
-          {step === 3 ? <AccountStep /> : null}
         </View>
       </Animated.View>
     </OnboardingLayout>

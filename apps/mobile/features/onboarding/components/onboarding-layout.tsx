@@ -17,7 +17,7 @@ export function OnboardingLayout({ children, footer }: OnboardingLayoutProps) {
 
       <View
         pointerEvents="none"
-        className="absolute -left-36 bottom-10 h-60 w-60 rounded-full bg-[#ff501e]/5"
+        className="absolute h-60 w-60 rounded-full bg-[#ff501e]/10 blur-2xl -bottom-28"
       />
 
       <SafeAreaView edges={["top", "bottom"]} style={{ flex: 1 }}>
