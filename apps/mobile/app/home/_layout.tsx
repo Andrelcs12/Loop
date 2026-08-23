@@ -1,13 +1,13 @@
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { BlurView } from "expo-blur";
 import { Tabs } from "expo-router";
-import { User, Zap } from "lucide-react-native";
+import { CheckSquare, History, House, Play, User } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import {
-  ImageSourcePropType,
   LayoutChangeEvent,
   Pressable,
   StyleSheet,
+  Text,
   View,
 } from "react-native";
 import Animated, {
@@ -20,10 +20,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { semanticColors } from "@loop/design-tokens";
 
-const loopMark = require("../../assets/images/brand/loop-mark.png");
-
 const TAB_BAR_HORIZONTAL_MARGIN = 18;
-const TAB_BAR_HEIGHT = 64;
+const TAB_BAR_HEIGHT = 72;
 const TAB_BAR_PADDING = 6;
 
 export default function TabsLayout() {
@@ -47,19 +45,10 @@ export default function TabsLayout() {
         }}
       />
 
-      <Tabs.Screen
-        name="teste"
-        options={{
-          title: "Agora",
-        }}
-      />
-
-      <Tabs.Screen
-        name="perfil"
-        options={{
-          title: "Perfil",
-        }}
-      />
+      <Tabs.Screen name="tasks" options={{ title: "Tarefas" }} />
+      <Tabs.Screen name="now" options={{ title: "Agora" }} />
+      <Tabs.Screen name="history" options={{ title: "Histórico" }} />
+      <Tabs.Screen name="profile" options={{ title: "Perfil" }} />
     </Tabs>
   );
 }
@@ -168,11 +157,10 @@ function LoopTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
               accessibilityLabel={options.tabBarAccessibilityLabel}
               style={styles.tab}
             >
-              <TabIcon
-                routeName={route.name}
-                focused={focused}
-                loopMark={loopMark}
-              />
+              <TabIcon routeName={route.name} focused={focused} />
+              <Text style={[styles.label, focused && styles.labelFocused]}>
+                {options.title}
+              </Text>
             </Pressable>
           );
         })}
@@ -184,11 +172,9 @@ function LoopTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
 function TabIcon({
   routeName,
   focused,
-  loopMark,
 }: {
   routeName: string;
   focused: boolean;
-  loopMark: ImageSourcePropType;
 }) {
   const scale = useSharedValue(focused ? 1.06 : 1);
 
@@ -214,29 +200,43 @@ function TabIcon({
     ],
   }));
 
-  const color = focused ? semanticColors.primary : "#8A8A91";
+  const color = focused ? semanticColors.primary : "#A1A1AA";
 
   if (routeName === "index") {
     return (
-      <Animated.Image
-        source={loopMark}
-        resizeMode="contain"
-        style={[styles.loopIcon, animatedStyle]}
-      />
+      <Animated.View style={animatedStyle}>
+        <House size={20} color={color} strokeWidth={2.2} />
+      </Animated.View>
     );
   }
 
-  if (routeName === "teste") {
+  if (routeName === "tasks") {
     return (
       <Animated.View style={animatedStyle}>
-        <Zap size={24} color={color} strokeWidth={2.2} />
+        <CheckSquare size={20} color={color} strokeWidth={2.2} />
+      </Animated.View>
+    );
+  }
+
+  if (routeName === "now") {
+    return (
+      <Animated.View style={[styles.nowIcon, animatedStyle]}>
+        <Play size={19} color={semanticColors.textInverse} fill={semanticColors.textInverse} strokeWidth={2.4} />
+      </Animated.View>
+    );
+  }
+
+  if (routeName === "history") {
+    return (
+      <Animated.View style={animatedStyle}>
+        <History size={20} color={color} strokeWidth={2.2} />
       </Animated.View>
     );
   }
 
   return (
     <Animated.View style={animatedStyle}>
-      <User size={24} color={color} strokeWidth={2.2} />
+      <User size={20} color={color} strokeWidth={2.2} />
     </Animated.View>
   );
 }
@@ -301,9 +301,22 @@ const styles = StyleSheet.create({
 
     zIndex: 2,
   },
-
-  loopIcon: {
-    width: 25,
-    height: 25,
+  label: {
+    color: semanticColors.textMuted,
+    fontFamily: "Inter_500Medium",
+    fontSize: 10,
+    marginTop: 3,
+  },
+  labelFocused: {
+    color: semanticColors.primary,
+  },
+  nowIcon: {
+    alignItems: "center",
+    backgroundColor: semanticColors.primary,
+    borderRadius: 20,
+    height: 38,
+    justifyContent: "center",
+    marginTop: -14,
+    width: 38,
   },
 });

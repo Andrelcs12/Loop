@@ -5,6 +5,9 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@loop/types": [
+        "../../packages/types/src"
       ]
     }
   },

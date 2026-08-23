@@ -1,0 +1,1 @@
+export const historyMockData = { completedCount: "3 concluídas", completedTime: "2h45 realizadas", completionRate: "75%", completed: ["Ler 20 páginas", "Exercício", "Estudo"], interrupted: ["Organização pessoal"] } as const;
