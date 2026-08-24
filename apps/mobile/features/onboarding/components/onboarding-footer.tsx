@@ -12,7 +12,7 @@ export function OnboardingFooter({ step, onPress }: OnboardingFooterProps) {
   const isLastStep = step === 2;
 
   return (
-    <View className="gap-5">
+    <View className="gap-4">
       <OnboardingProgress activeStep={step} />
 
       <PrimaryButton

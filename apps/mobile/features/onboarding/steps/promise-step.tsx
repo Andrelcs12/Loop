@@ -38,7 +38,7 @@ export function PromiseStep() {
         O Loop transforma seu tempo disponível em uma próxima ação clara.
       </Text>
 
-      <View className="mt-10">
+      <View className="mt-8">
         {TIMELINE_ITEMS.map((item, index) => (
           <TimelineItem
             key={item.title}

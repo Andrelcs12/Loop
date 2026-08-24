@@ -39,7 +39,7 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
         exiting={FadeOutLeft.duration(220)}
         style={{ flex: 1 }}
       >
-        <View className="flex-1 justify-start pt-4">
+        <View className="flex-1 justify-start">
           {step === 0 ? <WelcomeStep /> : null}
           {step === 1 ? <PromiseStep /> : null}
           {step === 2 ? <HowItWorksStep /> : null}

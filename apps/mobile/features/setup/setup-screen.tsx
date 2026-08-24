@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { KeyboardAvoidingView, Platform, ScrollView } from "react-native";
 import Animated, { Easing, FadeInRight, FadeOutLeft } from "react-native-reanimated";
 import { View } from "react-native-css/components";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -43,15 +44,24 @@ export function SetupScreen({ onComplete }: SetupScreenProps) {
   return (
     <View className="flex-1 bg-loop-background">
       <SafeAreaView edges={["top", "bottom"]} className="flex-1 px-6">
-        <View className="pt-5"><SetupProgress activeStep={step} totalSteps={LAST_STEP + 1} /></View>
-        <Animated.View key={step} entering={FadeInRight.duration(300).easing(Easing.out(Easing.cubic))} exiting={FadeOutLeft.duration(180)} className="flex-1 pt-10">
-          {step === 0 ? <GoalStep value={answers.goal} onChange={(goal) => setAnswers((current) => ({ ...current, goal }))} /> : null}
-          {step === 1 ? <RoutineStep value={answers.routine} onChange={(routine) => setAnswers((current) => ({ ...current, routine }))} /> : null}
-          {step === 2 ? <AvailableTimeStep value={answers.availableTime} onChange={(availableTime) => setAnswers((current) => ({ ...current, availableTime }))} /> : null}
-          {step === 3 ? <FirstCommitmentStep value={answers.firstCommitment ?? EMPTY_COMMITMENT} onChange={(firstCommitment) => setAnswers((current) => ({ ...current, firstCommitment }))} onSkip={handleSkipCommitment} /> : null}
-          {step === 4 ? <ReadyStep /> : null}
-        </Animated.View>
-        <View className="pb-4"><SetupFooter step={step} onBack={() => setStep((current) => Math.max(0, current - 1))} onContinue={handleContinue} /></View>
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={{ flex: 1 }}>
+          <View className="pt-6"><SetupProgress activeStep={step} totalSteps={LAST_STEP + 1} /></View>
+          <Animated.View key={step} entering={FadeInRight.duration(300).easing(Easing.out(Easing.cubic))} exiting={FadeOutLeft.duration(180)} className="flex-1">
+            <ScrollView
+              contentContainerStyle={{ flexGrow: 1, paddingTop: 28, paddingBottom: 32 }}
+              keyboardShouldPersistTaps="handled"
+              showsVerticalScrollIndicator={false}
+              style={{ flex: 1 }}
+            >
+              {step === 0 ? <GoalStep value={answers.goal} onChange={(goal) => setAnswers((current) => ({ ...current, goal }))} /> : null}
+              {step === 1 ? <RoutineStep value={answers.routine} onChange={(routine) => setAnswers((current) => ({ ...current, routine }))} /> : null}
+              {step === 2 ? <AvailableTimeStep value={answers.availableTime} onChange={(availableTime) => setAnswers((current) => ({ ...current, availableTime }))} /> : null}
+              {step === 3 ? <FirstCommitmentStep value={answers.firstCommitment ?? EMPTY_COMMITMENT} onChange={(firstCommitment) => setAnswers((current) => ({ ...current, firstCommitment }))} onSkip={handleSkipCommitment} /> : null}
+              {step === 4 ? <ReadyStep /> : null}
+            </ScrollView>
+          </Animated.View>
+          <View className="border-t border-loop-border bg-loop-background pb-4 pt-4"><SetupFooter step={step} onBack={() => setStep((current) => Math.max(0, current - 1))} onContinue={handleContinue} /></View>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </View>
   );

@@ -11,7 +11,7 @@ export function OptionCard({ label, selected, onPress }: OptionCardProps) {
     <Pressable
       accessibilityRole="radio"
       accessibilityState={{ selected }}
-      className={`min-h-[60px] flex-row items-center rounded-loop-xl border px-5 active:opacity-80 ${
+      className={`min-h-14 flex-row items-center rounded-loop-xl border px-5 active:opacity-80 ${
         selected
           ? "border-loop-primary bg-loop-primary/15"
           : "border-loop-border bg-loop-surface"

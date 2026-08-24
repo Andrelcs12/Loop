@@ -1,5 +1,6 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { ScrollView } from "react-native";
 import { Text, View } from "react-native-css/components";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -13,7 +14,11 @@ export function AuthScreen({ onAuthenticate }: AuthScreenProps) {
   return (
     <View className="flex-1 bg-loop-background">
       <SafeAreaView edges={["top", "bottom"]} className="flex-1 px-6">
-        <View className="flex-1 justify-center">
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1, justifyContent: "center", paddingVertical: 32 }}
+          showsVerticalScrollIndicator={false}
+          style={{ flex: 1 }}
+        >
           <View className="h-14 w-14 items-center justify-center rounded-full bg-loop-primary/15">
             <MaterialIcons color="#FF6A00" name="bolt" size={28} />
           </View>
@@ -45,13 +50,15 @@ export function AuthScreen({ onAuthenticate }: AuthScreenProps) {
             </View>
             <PrimaryButton label="Continuar com e-mail" onPress={onAuthenticate} />
           </View>
-        </View>
+        </ScrollView>
 
-        <PrimaryButton
-          label="Já tenho conta"
-          onPress={onAuthenticate}
-          variant="secondary"
-        />
+        <View className="bg-loop-background pb-4 pt-3">
+          <PrimaryButton
+            label="Já tenho conta"
+            onPress={onAuthenticate}
+            variant="secondary"
+          />
+        </View>
       </SafeAreaView>
     </View>
   );

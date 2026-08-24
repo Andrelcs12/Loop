@@ -1,6 +1,8 @@
 import { TextInput } from "react-native";
 import { Pressable, Text, View } from "react-native-css/components";
 
+import { SetupStepHeader } from "../components/setup-step-header";
+
 export type FirstCommitment = {
   title: string;
   date: string;
@@ -20,10 +22,12 @@ export function FirstCommitmentStep({ value, onChange, onSkip }: FirstCommitment
 
   return (
     <View>
-      <Text className="font-loop-bold text-3xl leading-9 tracking-[-0.8px] text-loop-text-primary">Qual é seu próximo compromisso?</Text>
-      <Text className="mt-3 font-loop-regular text-base leading-6 text-loop-text-secondary">Você pode adicionar algo que já está marcado no seu dia.</Text>
+      <SetupStepHeader
+        title="Qual é seu próximo compromisso?"
+        description="Você pode adicionar algo que já está marcado no seu dia."
+      />
 
-      <View className="mt-8 gap-4">
+      <View className="mt-7 gap-4">
         <Field label="Título" value={value.title} placeholder="Aula" onChangeText={(text) => updateField("title", text)} />
         <View className="flex-row gap-3">
           <View className="flex-1"><Field label="Data" value={value.date} placeholder="Hoje" onChangeText={(text) => updateField("date", text)} /></View>

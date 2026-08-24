@@ -24,7 +24,7 @@ export function SetupProgress({ activeStep, totalSteps }: SetupProgressProps) {
           <ProgressSegment key={index} active={index <= activeStep} />
         ))}
       </View>
-      <Text className="mt-3 font-loop-medium text-xs text-loop-text-muted">
+      <Text className="mt-2 font-loop-medium text-xs text-loop-text-muted">
         {activeStep + 1} de {totalSteps}
       </Text>
     </View>

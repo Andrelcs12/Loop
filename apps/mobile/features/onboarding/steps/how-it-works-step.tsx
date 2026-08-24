@@ -42,7 +42,7 @@ export function HowItWorksStep() {
         ação.
       </Text>
 
-      <View className="mt-10">
+      <View className="mt-8">
         {instructions.map((item, index) => {
           const isLast = index === instructions.length - 1;
 

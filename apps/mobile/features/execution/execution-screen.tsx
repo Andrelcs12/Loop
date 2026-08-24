@@ -2,6 +2,7 @@ import type { TaskExecutionOutcome } from "@loop/types";
 import { router } from "expo-router";
 import { Check } from "lucide-react-native";
 import { useEffect, useState } from "react";
+import { ScrollView } from "react-native";
 import { Pressable, Text, View } from "react-native-css/components";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -60,54 +61,62 @@ export function ExecutionScreen() {
     <View className="flex-1 bg-loop-background">
       <SafeAreaView
         edges={["top", "bottom"]}
-        className="flex-1 justify-between px-6 py-8"
+        className="flex-1 px-6"
       >
-        <View>
-          <Text className="font-loop-medium text-sm uppercase tracking-[1.2px] text-loop-primary">
-            Em andamento
-          </Text>
-          <Text className="mt-7 font-loop-bold text-3xl tracking-[-0.8px] text-loop-text-primary">
-            {task.title}
-          </Text>
-        </View>
-
-        <View className="items-center">
-          <Text className="font-loop-bold text-6xl tracking-[-2px] text-loop-text-primary">
-            {formatTime(remainingSeconds)}
-          </Text>
-          <Text className="mt-3 font-loop-regular text-base text-loop-text-secondary">
-            tempo restante
-          </Text>
-        </View>
-
-        <View className="gap-3">
-          <Pressable
-            accessibilityRole="button"
-            className="min-h-14 items-center justify-center rounded-loop-lg bg-loop-primary"
-            onPress={() => setPaused((value) => !value)}
-          >
-            <Text className="font-loop-semibold text-base text-loop-text-inverse">
-              {paused ? "Retomar" : "Pausar"}
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1, paddingBottom: 24, paddingTop: 32 }}
+          showsVerticalScrollIndicator={false}
+          style={{ flex: 1 }}
+        >
+          <View className="flex-1">
+            <Text className="font-loop-medium text-sm uppercase tracking-[1.2px] text-loop-primary">
+              Em andamento
             </Text>
-          </Pressable>
-          <Pressable
-            accessibilityRole="button"
-            className="min-h-14 items-center justify-center rounded-loop-lg border border-loop-border bg-loop-surface"
-            onPress={() => finish("COMPLETED")}
-          >
-            <Text className="font-loop-semibold text-base text-loop-text-primary">
-              Concluir
+            <Text className="mt-7 font-loop-bold text-3xl tracking-[-0.8px] text-loop-text-primary">
+              {task.title}
             </Text>
-          </Pressable>
-          <View className="flex-row gap-3">
-            <SecondaryAction
-              label="Interromper"
-              onPress={() => finish("INTERRUPTED")}
-            />
-            <SecondaryAction
-              label="Pular"
-              onPress={() => finish("SKIPPED")}
-            />
+
+            <View className="flex-1 items-center justify-center">
+              <Text className="font-loop-bold text-6xl tracking-[-2px] text-loop-text-primary">
+                {formatTime(remainingSeconds)}
+              </Text>
+              <Text className="mt-3 font-loop-regular text-base text-loop-text-secondary">
+                tempo restante
+              </Text>
+            </View>
+          </View>
+        </ScrollView>
+
+        <View className="bg-loop-background pb-4 pt-3">
+          <View className="gap-3">
+            <Pressable
+              accessibilityRole="button"
+              className="min-h-14 items-center justify-center rounded-loop-lg bg-loop-primary"
+              onPress={() => setPaused((value) => !value)}
+            >
+              <Text className="font-loop-semibold text-base text-loop-text-inverse">
+                {paused ? "Retomar" : "Pausar"}
+              </Text>
+            </Pressable>
+            <Pressable
+              accessibilityRole="button"
+              className="min-h-14 items-center justify-center rounded-loop-lg border border-loop-border bg-loop-surface"
+              onPress={() => finish("COMPLETED")}
+            >
+              <Text className="font-loop-semibold text-base text-loop-text-primary">
+                Concluir
+              </Text>
+            </Pressable>
+            <View className="flex-row gap-3">
+              <SecondaryAction
+                label="Interromper"
+                onPress={() => finish("INTERRUPTED")}
+              />
+              <SecondaryAction
+                label="Pular"
+                onPress={() => finish("SKIPPED")}
+              />
+            </View>
           </View>
         </View>
       </SafeAreaView>

@@ -1,4 +1,5 @@
 import type { PropsWithChildren, ReactNode } from "react";
+import { ScrollView } from "react-native";
 
 import { View } from "react-native-css/components";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -21,9 +22,15 @@ export function OnboardingLayout({ children, footer }: OnboardingLayoutProps) {
       />
 
       <SafeAreaView edges={["top", "bottom"]} style={{ flex: 1 }}>
-        <View className="flex-1 px-6 pt-8">{children}</View>
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 24, paddingTop: 32, paddingBottom: 24 }}
+          showsVerticalScrollIndicator={false}
+          style={{ flex: 1 }}
+        >
+          {children}
+        </ScrollView>
 
-        {footer ? <View className="px-6 pb-4">{footer}</View> : null}
+        {footer ? <View className="border-t border-loop-border bg-loop-background px-6 pb-4 pt-4">{footer}</View> : null}
       </SafeAreaView>
     </View>
   );

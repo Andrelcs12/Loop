@@ -14,7 +14,7 @@ export function WelcomeStep() {
         />
       </View>
 
-      <Text className="font-loop-bold mt-4 text-4xl leading-[42px] tracking-[-1px] text-loop-text-primary">
+      <Text className="mt-6 font-loop-bold text-4xl leading-[42px] tracking-[-1px] text-loop-text-primary">
         Bem-vindo ao{"\n"}
         <Text className="text-loop-primary">Loop!</Text>
       </Text>
@@ -31,6 +31,5 @@ const styles = StyleSheet.create({
   illustration: {
     width: "100%",
     height: 208,
-    marginBottom: 28,
   },
 });
