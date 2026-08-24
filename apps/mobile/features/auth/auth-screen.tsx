@@ -7,10 +7,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { PrimaryButton } from "@/features/onboarding/components/primary-button";
 
 type AuthScreenProps = {
-  onAuthenticate: () => void;
+  error: string | null;
+  isSubmitting: boolean;
+  onGoogleAuthenticate: () => void;
 };
 
-export function AuthScreen({ onAuthenticate }: AuthScreenProps) {
+export function AuthScreen({ error, isSubmitting, onGoogleAuthenticate }: AuthScreenProps) {
   return (
     <View className="flex-1 bg-loop-background">
       <SafeAreaView edges={["top", "bottom"]} className="flex-1 px-6">
@@ -33,14 +35,14 @@ export function AuthScreen({ onAuthenticate }: AuthScreenProps) {
           <View className="mt-10 gap-3">
             <PrimaryButton
               icon={<FontAwesome color="#FAFAFA" name="google" size={20} />}
-              label="Continuar com Google"
-              onPress={onAuthenticate}
+              label={isSubmitting ? "Entrando..." : "Continuar com Google"}
+              onPress={onGoogleAuthenticate}
               variant="secondary"
             />
             <PrimaryButton
               icon={<FontAwesome color="#FAFAFA" name="apple" size={22} />}
               label="Continuar com Apple"
-              onPress={onAuthenticate}
+              onPress={() => undefined}
               variant="secondary"
             />
             <View className="my-2 flex-row items-center gap-3">
@@ -48,14 +50,15 @@ export function AuthScreen({ onAuthenticate }: AuthScreenProps) {
               <Text className="font-loop-medium text-sm text-loop-text-muted">ou</Text>
               <View className="h-px flex-1 bg-loop-border" />
             </View>
-            <PrimaryButton label="Continuar com e-mail" onPress={onAuthenticate} />
+            <PrimaryButton label="Continuar com e-mail" onPress={() => undefined} />
           </View>
+          {error ? <Text className="mt-4 font-loop-regular text-sm text-red-400">{error}</Text> : null}
         </ScrollView>
 
         <View className="bg-loop-background pb-4 pt-3">
           <PrimaryButton
             label="Já tenho conta"
-            onPress={onAuthenticate}
+            onPress={onGoogleAuthenticate}
             variant="secondary"
           />
         </View>

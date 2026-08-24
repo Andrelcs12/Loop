@@ -15,6 +15,7 @@ import "react-native-reanimated";
 import "../global.css";
 
 import { semanticColors } from "@loop/design-tokens";
+import { AuthProvider } from "@/features/auth/auth-provider";
 import { TaskFlowProvider } from "@/features/tasks/task-flow-provider";
 
 SplashScreen.preventAutoHideAsync();
@@ -55,16 +56,18 @@ export default function RootLayout() {
         },
       }}
     >
-      <TaskFlowProvider>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
-          <Stack.Screen name="(auth)/auth" options={{ headerShown: false }} />
-          <Stack.Screen name="setup" options={{ headerShown: false }} />
-          <Stack.Screen name="home" options={{ headerShown: false }} />
-          <Stack.Screen name="create-task" options={{ headerShown: false }} />
-          <Stack.Screen name="execution" options={{ headerShown: false }} />
-        </Stack>
-      </TaskFlowProvider>
+      <AuthProvider>
+        <TaskFlowProvider>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
+            <Stack.Screen name="(auth)/auth" options={{ headerShown: false }} />
+            <Stack.Screen name="setup" options={{ headerShown: false }} />
+            <Stack.Screen name="home" options={{ headerShown: false }} />
+            <Stack.Screen name="create-task" options={{ headerShown: false }} />
+            <Stack.Screen name="execution" options={{ headerShown: false }} />
+          </Stack>
+        </TaskFlowProvider>
+      </AuthProvider>
       <StatusBar style="light" />
     </ThemeProvider>
   );
