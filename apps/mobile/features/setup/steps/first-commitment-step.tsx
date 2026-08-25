@@ -30,7 +30,7 @@ export function FirstCommitmentStep({ value, onChange, onSkip }: FirstCommitment
       <View className="mt-7 gap-4">
         <Field label="Título" value={value.title} placeholder="Aula" onChangeText={(text) => updateField("title", text)} />
         <View className="flex-row gap-3">
-          <View className="flex-1"><Field label="Data" value={value.date} placeholder="Hoje" onChangeText={(text) => updateField("date", text)} /></View>
+          <View className="flex-1"><Field label="Data" value={value.date} placeholder="AAAA-MM-DD" onChangeText={(text) => updateField("date", text)} /></View>
           <View className="flex-1"><Field label="Horário" value={value.time} placeholder="15:30" onChangeText={(text) => updateField("time", text)} /></View>
         </View>
       </View>

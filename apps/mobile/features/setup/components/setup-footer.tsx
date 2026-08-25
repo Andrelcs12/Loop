@@ -4,13 +4,14 @@ import { PrimaryButton } from "@/features/onboarding/components/primary-button";
 
 type SetupFooterProps = {
   step: number;
+  isLoading: boolean;
   onBack: () => void;
   onContinue: () => void;
 };
 
 const LAST_STEP = 4;
 
-export function SetupFooter({ step, onBack, onContinue }: SetupFooterProps) {
+export function SetupFooter({ step, isLoading, onBack, onContinue }: SetupFooterProps) {
   return (
     <View className="flex-row items-center gap-4">
       {step > 0 ? (
@@ -25,7 +26,7 @@ export function SetupFooter({ step, onBack, onContinue }: SetupFooterProps) {
       ) : null}
       <View className="flex-1">
         <PrimaryButton
-          label={step === LAST_STEP ? "Ver agora" : "Continuar"}
+          label={isLoading ? "Salvando..." : step === LAST_STEP ? "Ver agora" : "Continuar"}
           onPress={onContinue}
         />
       </View>

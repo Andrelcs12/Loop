@@ -17,7 +17,66 @@ model User {
   setupCompleted Boolean  @default(false)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
+  setup          UserSetup?
+  commitments    Commitment[]
 
   @@index([email])
   @@map("users")
+}
+
+enum SetupGoal {
+  PRODUCTIVITY
+  STUDY
+  HEALTHY_HABITS
+  MORE_FREE_TIME
+  LIFE_ORGANIZATION
+}
+
+enum RoutinePeriod {
+  MORNING
+  AFTERNOON
+  EVENING
+  ALL_DAY
+}
+
+enum AvailableTime {
+  UNDER_30_MINUTES
+  FROM_30_TO_60_MINUTES
+  FROM_1_TO_2_HOURS
+  OVER_2_HOURS
+}
+
+enum CommitmentSource {
+  SETUP
+}
+
+model UserSetup {
+  id                String        @id @default(uuid()) @db.Uuid
+  userId            String        @unique @db.Uuid
+  goal              SetupGoal?
+  routine           RoutinePeriod?
+  availableTime     AvailableTime?
+  currentStep       Int           @default(0)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  user              User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  initialCommitment Commitment?
+
+  @@map("user_setups")
+}
+
+model Commitment {
+  id        String           @id @default(uuid()) @db.Uuid
+  userId    String           @db.Uuid
+  setupId   String?          @unique @db.Uuid
+  title     String
+  startsAt  DateTime
+  source    CommitmentSource @default(SETUP)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  setup     UserSetup?       @relation(fields: [setupId], references: [id], onDelete: Cascade)
+
+  @@index([userId, startsAt])
+  @@map("commitments")
 }
