@@ -16,7 +16,10 @@ export type TaskFlowContextValue = {
   tasks: Task[];
   executions: TaskExecution[];
   activeExecution?: TaskExecution;
-  createTask: (input: CreateTaskInput) => Task;
+  createTask: (input: CreateTaskInput) => Promise<Task>;
+  isTasksLoading: boolean;
+  refreshTasks: () => Promise<void>;
+  tasksError: string | null;
   startTask: (taskId: string) => void;
   finishActiveExecution: (outcome: TaskExecutionOutcome) => void;
 };

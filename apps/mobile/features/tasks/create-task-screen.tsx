@@ -20,8 +20,9 @@ export function CreateTaskScreen() {
   const [priority, setPriority] = useState<TaskPriority>("MEDIUM");
   const [deadline, setDeadline] = useState("");
   const [error, setError] = useState<string>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  function handleSave() {
+  async function handleSave() {
     const parsedMinutes = Number(estimatedMinutes);
     const parsedDeadline = deadline
       ? new Date(`${deadline}T23:59:59`)
@@ -42,13 +43,21 @@ export function CreateTaskScreen() {
       return;
     }
 
-    createTask({
-      title: title.trim(),
-      estimatedMinutes: parsedMinutes,
-      priority,
-      deadline: parsedDeadline,
-    });
-    router.back();
+    setIsSubmitting(true);
+    setError(undefined);
+    try {
+      await createTask({
+        title: title.trim(),
+        estimatedMinutes: parsedMinutes,
+        priority,
+        deadline: parsedDeadline,
+      });
+      router.back();
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "Não foi possível criar a tarefa.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -135,11 +144,13 @@ export function CreateTaskScreen() {
 
             <Pressable
               accessibilityRole="button"
-              className="mt-8 min-h-14 items-center justify-center rounded-loop-lg bg-loop-primary active:opacity-80"
-              onPress={handleSave}
+              accessibilityState={{ disabled: isSubmitting }}
+              className={`mt-8 min-h-14 items-center justify-center rounded-loop-lg bg-loop-primary ${isSubmitting ? "opacity-60" : "active:opacity-80"}`}
+              disabled={isSubmitting}
+              onPress={() => void handleSave()}
             >
               <Text className="font-loop-semibold text-base text-loop-text-inverse">
-                Salvar tarefa
+                {isSubmitting ? "Salvando..." : "Salvar tarefa"}
               </Text>
             </Pressable>
             <Pressable

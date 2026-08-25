@@ -19,7 +19,7 @@ const filters: { label: string; value: Filter }[] = [
 ];
 
 export function TasksScreen() {
-  const { tasks } = useTaskFlow();
+  const { isTasksLoading, refreshTasks, tasks, tasksError } = useTaskFlow();
   const [filter, setFilter] = useState<Filter>("ALL");
   const visibleTasks = useMemo(
     () =>
@@ -89,9 +89,16 @@ export function TasksScreen() {
             paddingHorizontal: 24,
           }}
           ListEmptyComponent={
-            <Text className="text-center font-loop-regular text-base text-loop-text-secondary">
-              Nenhuma tarefa ainda.
-            </Text>
+            isTasksLoading ? (
+              <Text className="text-center font-loop-regular text-base text-loop-text-secondary">Carregando tarefas...</Text>
+            ) : tasksError ? (
+              <View className="items-center gap-3">
+                <Text className="text-center font-loop-regular text-base text-red-500">{tasksError}</Text>
+                <Pressable accessibilityRole="button" className="rounded-full bg-loop-surface px-4 py-2" onPress={() => void refreshTasks()}><Text className="font-loop-semibold text-sm text-loop-text-primary">Tentar novamente</Text></Pressable>
+              </View>
+            ) : (
+              <Text className="text-center font-loop-regular text-base text-loop-text-secondary">Nenhuma tarefa ainda.</Text>
+            )
           }
           showsVerticalScrollIndicator={false}
         />

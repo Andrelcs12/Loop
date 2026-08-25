@@ -19,6 +19,7 @@ model User {
   updatedAt      DateTime @updatedAt
   setup          UserSetup?
   commitments    Commitment[]
+  tasks          Task[]
 
   @@index([email])
   @@map("users")
@@ -50,6 +51,19 @@ enum CommitmentSource {
   SETUP
 }
 
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  ARCHIVED
+}
+
 model UserSetup {
   id                String        @id @default(uuid()) @db.Uuid
   userId            String        @unique @db.Uuid
@@ -79,4 +93,21 @@ model Commitment {
 
   @@index([userId, startsAt])
   @@map("commitments")
+}
+
+model Task {
+  id               String       @id @default(uuid()) @db.Uuid
+  userId           String       @db.Uuid
+  title            String
+  estimatedMinutes Int
+  priority         TaskPriority
+  deadline         DateTime?
+  status           TaskStatus   @default(PENDING)
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, status])
+  @@index([userId, deadline])
+  @@map("tasks")
 }
